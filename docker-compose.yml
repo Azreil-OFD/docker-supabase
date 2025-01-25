@@ -8,26 +8,6 @@
 name: supabase
 
 services:
-  tuna:
-    container_name: supabase-tuna
-    restart: unless-stopped
-    build:
-      context: ./volumes/tuna/  # Указываем контекст сборки
-      dockerfile: Dockerfile
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "fetch('https://supabase.ru.tuna.am/').then((r) => {if (r.status !== 200) throw new Error(r.status)})"
-        ]
-      timeout: 10s
-      interval: 5s
-      retries: 3
-    depends_on:
-      kong:
-    
   studio:
     container_name: supabase-studio
     image: supabase/studio:20250113-83c9420
@@ -95,7 +75,26 @@ services:
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD}
     # https://unix.stackexchange.com/a/294837
     entrypoint: bash -c 'eval "echo \"$$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
-
+  tuna:
+    container_name: supabase-tuna
+    restart: unless-stopped
+    build:
+      context: ./volumes/tuna/  # Указываем контекст сборки
+      dockerfile: Dockerfile
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('https://supabase.ru.tuna.am/').then((r) => {if (r.status !== 200) throw new Error(r.status)})"
+        ]
+      timeout: 10s
+      interval: 5s
+      retries: 3
+    depends_on:
+      kong:
+        condition: service_healthy
   auth:
     container_name: supabase-auth
     image: supabase/gotrue:v2.167.0
