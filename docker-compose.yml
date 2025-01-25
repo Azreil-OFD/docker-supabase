@@ -79,7 +79,7 @@ services:
     container_name: supabase-tuna
     restart: unless-stopped
     build:
-      context: ./volumes/tuna/  # Указываем контекст сборки
+      context: ./volumes/tuna/
       dockerfile: Dockerfile
     healthcheck:
       test:

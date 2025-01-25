@@ -11,4 +11,4 @@ RUN curl -sSLf https://get.tuna.am | sh
 RUN tuna config save-token tt_ubx4yk96ygl7n8lt0uh2npkk703aow1x
 
 # Команда по умолчанию при запуске контейнера
-CMD ["tuna", "http", "http://kong:8000"]
+CMD ["tuna", "http", "http://kong:8000" , "--subdomain=supabase"]
