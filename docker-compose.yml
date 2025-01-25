@@ -8,7 +8,26 @@
 name: supabase
 
 services:
-
+  tuna:
+    container_name: supabase-tuna
+    restart: unless-stopped
+    build:
+      context: ./volumes/tuna/  # Указываем контекст сборки
+      dockerfile: Dockerfile
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('https://supabase.ru.tuna.am/').then((r) => {if (r.status !== 200) throw new Error(r.status)})"
+        ]
+      timeout: 10s
+      interval: 5s
+      retries: 3
+    depends_on:
+      kong:
+    
   studio:
     container_name: supabase-studio
     image: supabase/studio:20250113-83c9420
