@@ -87,7 +87,7 @@ services:
           "CMD",
           "node",
           "-e",
-          "fetch('https://supabase.ru.tuna.am/').then((r) => {if (r.status !== 200) throw new Error(r.status)})"
+          "fetch('https://docker-supabase.ru.tuna.am/').then((r) => {if (r.status !== 200) throw new Error(r.status)})"
         ]
       timeout: 10s
       interval: 5s
