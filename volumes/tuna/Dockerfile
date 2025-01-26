@@ -19,4 +19,4 @@ RUN chmod +x start.sh
 
 COPY .tuna.yml .
 # Команда по умолчанию при запуске контейнера
-CMD ["./start.sh"]
+CMD ["source" , "start.sh"]
