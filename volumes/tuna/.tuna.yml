@@ -1,0 +1,8 @@
+tunnels:
+  supabase:
+    commandLine: tuna http  http://kong:8000 --subdomain=docker-supabase
+    tags: [frontend, supabase]
+
+  postgres:
+    commandLine: tuna tcp http://db:5432 --port=postgres
+    tags: [backend, postgres]
