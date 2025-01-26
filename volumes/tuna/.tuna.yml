@@ -6,7 +6,7 @@ tunnels:
     commandLine: tuna http  http://minio:9000 --subdomain=docker-minio
     tags: [frontend, minio]
   postgres:
-    commandLine: tuna tcp http://db:5432 --port=postgres
+    commandLine: tuna tcp 5432 --port=postgres
     tags: [backend, postgres]
   minio-api:
     commandLine: tuna http  http://minio:9001 --subdomain=docker-minio-api
